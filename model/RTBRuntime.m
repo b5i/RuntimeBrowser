@@ -85,7 +85,12 @@ static RTBRuntime *sharedInstance;
     
 	//Lookup the ClassStub for klass or create one if none exists and add it to +allClassStuds.
     NSString *klassName = NSStringFromClass(klass);
-	
+     
+    if (klassName == nil) {
+        NSLog(@"-- class with NULL name, ignore it");
+        return nil;
+    }
+    
     // First check if we've already got a ClassStub for klass. If yes, we'll return it.
     RTBClass *cs = [self classStubForClassName:klassName];
 	if(cs) return cs;
